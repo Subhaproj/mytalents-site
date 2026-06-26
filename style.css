@@ -346,3 +346,57 @@ body {
 .contact-item:last-child {
     border-bottom: none; /* Removes line from the last item */
 }
+
+/* Carousel Container Constraints */
+.carousel-container {
+    position: relative;
+    height: 260px; /* Matches your other project card heights */
+    background-color: #0F172A;
+    overflow: hidden;
+}
+
+/* Image Stack Logic */
+.carousel-slides {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.carousel-slides .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures your sketches/screenshots fit nicely */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Shows only the currently selected active image */
+.carousel-slides .slide.active {
+    opacity: 1;
+}
+
+/* Left & Right Interactive Clicking Buttons */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(15, 23, 42, 0.6);
+    color: #F8FAFC;
+    border: none;
+    font-size: 18px;
+    padding: 12px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    z-index: 10;
+}
+
+.carousel-btn:hover {
+    background-color: #3B82F6; /* Glows blue on hover */
+}
+
+.prev-btn { left: 10px; }
+.next-btn { right: 10px; }

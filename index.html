@@ -48,16 +48,37 @@
                 </div>
             </div>
 
-            <!-- Card 2: Code Project -->
+            <!-- Card 2: Coded Software (Now with an Interactive Slam Book Gallery) -->
             <div class="project-card" data-category="code">
-                <div class="card-image code-bg">
-                    <span class="preview-tag">Launch Live App</span>
-                </div>
-                <div class="card-content">
-                    <h3>SaaS Dashboard Platform</h3>
-                    <p class="tagline">React Web App</p>
-                </div>
-            </div>
+    
+    <!-- Interactive Carousel Container -->
+    <div class="carousel-container">
+        <!-- Change the src paths to match your exact image names and file extensions (.jpg or .png) -->
+        <div class="carousel-slides">
+            <img src="slambook/1.png" class="slide active" alt="Slam Book Page 1">
+            <img src="slambook/2.png" class="slide" alt="Slam Book Page 2">
+            <img src="slambook/3.png" class="slide" alt="Slam Book Page 3">
+            <img src="slambook/4.png" class="slide" alt="Slam Book Page 4">
+            <img src="slambook/5.png" class="slide" alt="Slam Book Page 5">
+            <img src="slambook/6.png" class="slide" alt="Slam Book Page 6">
+            <img src="slambook/7.png" class="slide" alt="Slam Book Page 7">
+            <img src="slambook/8.png" class="slide" alt="Slam Book Page 8">
+            <img src="slambook/9.png" class="slide" alt="Slam Book Page 9">
+            <img src="slambook/10.png" class="slide" alt="Slam Book Page 10">
+            
+        </div>
+        
+        <!-- Navigation Arrows -->
+        <button class="carousel-btn prev-btn">&#10094;</button>
+        <button class="carousel-btn next-btn">&#10095;</button>
+    </div>
+
+    <div class="card-content">
+        <h3>Slam Book Java Application</h3>
+        <p class="tagline">Desktop App Built with Java</p>
+    </div>
+</div>
+
 
             <!-- NEW Card 3: Traditional Art Card (Visible on Homepage) -->
             <div class="project-card" data-category="art">
@@ -183,6 +204,34 @@
                 modalOverlay.classList.remove('show-modal');
             }
         });
+
+                // Slam Book Interactive Gallery Logic
+        const slides = document.querySelectorAll('.slide');
+        const nextBtn = document.querySelector('.next-btn');
+        const prevBtn = document.querySelector('.prev-btn');
+        let currentSlideIndex = 0;
+
+        function showSlide(index) {
+            // Remove active class from current image
+            slides[currentSlideIndex].classList.remove('active');
+            
+            // Calculate next/prev index safely within 0 to 9 loop limits
+            currentSlideIndex = (index + slides.length) % slides.length;
+            
+            // Add active class to new image
+            slides[currentSlideIndex].classList.add('active');
+        }
+
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Stops the card click event from firing
+            showSlide(currentSlideIndex + 1);
+        });
+
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Stops the card click event from firing
+            showSlide(currentSlideIndex - 1);
+        });
+
 
     </script>
 
