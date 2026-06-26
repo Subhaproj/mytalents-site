@@ -31,6 +31,7 @@
             <button class="pill active">All Projects</button>
             <button class="pill">UX/UI Design</button>
             <button class="pill">Coded Software</button>
+            <button class="pill">Traditional Art</button> <!-- Added button -->
         </div>
 
         <!-- The Responsive Grid Grid (2 columns desktop, 1 column mobile) -->
@@ -55,6 +56,17 @@
                 <div class="card-content">
                     <h3>SaaS Dashboard Platform</h3>
                     <p class="tagline">React Web App</p>
+                </div>
+            </div>
+
+            <!-- NEW Card 3: Traditional Art Card (Visible on Homepage) -->
+            <div class="project-card" data-category="art">
+                <div class="card-image art-bg">
+                    <span class="preview-tag">View Sketchbook</span>
+                </div>
+                <div class="card-content">
+                    <h3>Anatomy & Nature Studies</h3>
+                    <p class="tagline">Traditional Pencil Sketches</p>
                 </div>
             </div>
 
@@ -117,6 +129,8 @@
                         card.style.display = 'block';
                     } else if (selectedCategory === 'Coded Software' && cardCategory === 'code') {
                         card.style.display = 'block';
+                    } else if (selectedCategory === 'Traditional Art' && cardCategory === 'art') {
+                        card.style.display = 'block'; // Handles the new Art category cleanly    
                     } else {
                         card.style.display = 'none';
                     }

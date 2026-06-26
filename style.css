@@ -115,11 +115,31 @@ body {
 }
 
 /* 12-Column Responsive Layout Simulation via CSS Grid */
+/* Update your existing project grid layout to this: */
 .project-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for side-by-side desktop view */
-    gap: 32px;
+    grid-template-columns: repeat(3, 1fr); /* 3 side-by-side columns on desktop */
+    gap: 24px; /* Slightly tighter gap to fit 3 cards comfortably */
 }
+
+/* Add this stylish gradient placeholder for your new art card background */
+.art-bg { 
+    background: linear-gradient(135deg, #f59e0b, #ef4444); /* Clean amber/orange gradient */
+}
+
+/* Ensure mobile responsiveness remains intact */
+@media (max-width: 1024px) {
+    .project-grid {
+        grid-template-columns: repeat(2, 1fr); /* Drops to 2 columns on tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .project-grid {
+        grid-template-columns: 1fr; /* Drops to 1 column stacked on mobile phones */
+    }
+}
+
 
 .project-card {
     background-color: #1E293B;
