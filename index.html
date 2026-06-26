@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyTalents Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header Navigation matching your top navbar -->
+    <header class="navbar">
+        <div class="logo">MyTalents</div>
+        <nav class="nav-links">
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="mailto:subhashreevaradharaj932@gmail.com" class="contact-btn">Contact Me</a>
+        </nav>
+    </header>
+
+    <!-- Hero Area centered exactly like your Figma mockup -->
+    <section class="hero">
+        <h1>Hi, I'm a Product Designer <span class="accent-text">Who Writes Code.</span></h1>
+        <p>I design seamless user experiences and build them into high-performance web applications.</p>
+    </section>
+
+    <!-- Work Section -->
+    <section id="work" class="work-section">
+        <!-- Interactive Category Pills -->
+        <div class="filter-pills">
+            <button class="pill active">All Projects</button>
+            <button class="pill">UX/UI Design</button>
+            <button class="pill">Coded Software</button>
+        </div>
+
+        <!-- The Responsive Grid Grid (2 columns desktop, 1 column mobile) -->
+        <div class="project-grid">
+            
+            <!-- Card 1: UX/UI Project -->
+            <div class="project-card" data-category="design">
+                <div class="card-image design-bg">
+                    <span class="preview-tag">View Prototype</span>
+                </div>
+                <div class="card-content">
+                    <h3>E-Commerce App Redesign</h3>
+                    <p class="tagline">Figma Design System</p>
+                </div>
+            </div>
+
+            <!-- Card 2: Code Project -->
+            <div class="project-card" data-category="code">
+                <div class="card-image code-bg">
+                    <span class="preview-tag">Launch Live App</span>
+                </div>
+                <div class="card-content">
+                    <h3>SaaS Dashboard Platform</h3>
+                    <p class="tagline">React Web App</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+        <!-- About Me Popup Modal -->
+    <div id="aboutModal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="close-modal-btn">&times;</button>
+            <div class="modal-body">
+                <div class="profile-pic">👨‍💻</div>
+                <h2>About Me</h2>
+                <p>I am a product designer and developer who bridges the gap between design pixels and production code. I specialize in building responsive user interfaces and interactive web apps.</p>
+                <a href="Resume.pdf" class="download-resume-btn" target="_blank">View My Resume</a>
+            </div>
+        </div>
+    </div>
+        <!-- Contact Info Popup Modal -->
+    <div id="contactModal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="close-contact-btn">&times;</button>
+            <div class="modal-body">
+                <div class="profile-pic">📞</div>
+                <h2>Contact Info</h2>
+                <p>Let's work together! Feel free to reach out through any of the channels below.</p>
+                
+                <!-- Contact Details List -->
+                <div class="contact-details">
+                    <div class="contact-item">📧 Email: <strong>subhashreevaradharaj932@gmail.com</strong></div>
+                    <div class="contact-item">📱 Phone: <strong>+91 9739862949</strong></div>
+                    <div class="contact-item">🔗 LinkedIn: <a href="//linkedin.com/in/subhashree-varadharaj" target="_blank" class="cantact-link"><strong>://linkedin.com/in/subhashree-varadharaj</strong></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Interactive Tab Filtering Script -->
+    <script>
+        // Select all tab buttons and project cards
+        const pills = document.querySelectorAll('.pill');
+        const cards = document.querySelectorAll('.project-card');
+
+        pills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                // 1. Switch the visual "active" blue state to the clicked button
+                pills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+
+                // 2. Get the category label text of the clicked button
+                const selectedCategory = pill.textContent.trim();
+
+                // 3. Loop through all cards and show/hide them based on category
+                cards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+
+                    if (selectedCategory === 'All Projects') {
+                        card.style.display = 'block';
+                    } else if (selectedCategory === 'UX/UI Design' && cardCategory === 'design') {
+                        card.style.display = 'block';
+                    } else if (selectedCategory === 'Coded Software' && cardCategory === 'code') {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+                // About Me Popup Interactivity Logic
+        const aboutLink = document.querySelector('a[href="#about"]');
+        const modalOverlay = document.getElementById('aboutModal');
+        const closeModalBtn = document.querySelector('.close-modal-btn');
+
+        // Open popup modal when "About" is clicked
+        aboutLink.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent standard page jump
+            modalOverlay.classList.add('show-modal');
+        });
+
+                // Contact Me Popup Interactivity Logic
+        const contactBtn = document.querySelector('.contact-btn');
+        const contactModal = document.getElementById('contactModal');
+        const closeContactBtn = document.querySelector('.close-contact-btn');
+
+        // Open contact modal when clicking "Contact Me"
+        contactBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Stop standard page movement
+            contactModal.classList.add('show-modal');
+        });
+
+        // Close contact modal when clicking the "X"
+        closeContactBtn.addEventListener('click', () => {
+            contactModal.classList.remove('show-modal');
+        });
+
+        // Close contact modal if clicking outside on the background overlay
+        contactModal.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                contactModal.classList.remove('show-modal');
+            }
+        });
+
+
+        // Close popup when clicking the "X" button
+        closeModalBtn.addEventListener('click', () => {
+            modalOverlay.classList.remove('show-modal');
+        });
+
+        // Close popup if clicking outside the card on the blurry overlay
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('show-modal');
+            }
+        });
+
+    </script>
+
+</body>
+</html>

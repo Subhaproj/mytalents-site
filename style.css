@@ -1,0 +1,328 @@
+/* Color Reset & Baseline */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background-color: #0F172A; /* Your exact deep slate bg */
+    color: #F8FAFC;
+    padding: 0 24px;
+}
+
+/* Navbar Layout */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 0;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.nav-links a {
+    color: #94A3B8;
+    text-decoration: none;
+    margin-left: 28px;
+    font-size: 16px;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #F8FAFC;
+}
+
+/* Find your existing button styling and ensure transition is active */
+.nav-links .contact-btn {
+    background-color: #3B82F6;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Add this new block right below it for the hover effect */
+.nav-links .contact-btn:hover {
+    background-color: #2563EB; /* Shifts to a deeper rich blue */
+    transform: translateY(-1px); /* Lifts slightly off the page */
+}
+
+.nav-links .contact-btn:active {
+    transform: translateY(0); /* Snaps back down when clicked */
+}
+
+
+/* Centered Hero Section */
+.hero {
+    max-width: 800px;
+    margin: 100px auto;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 24px;
+}
+
+.accent-text {
+    color: #3B82F6;
+}
+
+.hero p {
+    font-size: 20px;
+    color: #94A3B8;
+    line-height: 1.6;
+}
+
+/* Filter Capsule Buttons */
+.work-section {
+    max-width: 1200px;
+    margin: 0 auto 100px auto;
+}
+
+.filter-pills {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 48px;
+}
+
+.pill {
+    background-color: #1E293B; /* Card background gray */
+    border: 1px solid #334155;
+    color: #94A3B8;
+    padding: 10px 24px;
+    border-radius: 24px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.pill.active, .pill:hover {
+    background-color: #3B82F6;
+    color: #FFFFFF;
+    border-color: #3B82F6;
+}
+
+/* 12-Column Responsive Layout Simulation via CSS Grid */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for side-by-side desktop view */
+    gap: 32px;
+}
+
+.project-card {
+    background-color: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+}
+
+.card-image {
+    height: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Recreating your colorful card gradient layers */
+.design-bg { background: linear-gradient(135deg, #EC4899, #8B5CF6); }
+.code-bg { background: linear-gradient(135deg, #3B82F6, #10B981); }
+
+.preview-tag {
+    background-color: rgba(15, 23, 42, 0.8);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.card-content {
+    padding: 24px;
+    text-align: center;
+}
+
+.card-content h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.tagline {
+    color: #94A3B8;
+    font-size: 14px;
+}
+
+/* Mobile Screen Layout Rules */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .nav-links a {
+        margin: 0 12px;
+    }
+    .hero h1 {
+        font-size: 32px;
+    }
+    .hero p {
+        font-size: 16px;
+    }
+    /* Flattens grid columns to single stack for phones */
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Modal Overlay Background (Hidden by Default) */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.75); /* Dark tint */
+    backdrop-filter: blur(8px); /* Smooth background blur */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* Toggle Class for JavaScript to show the modal */
+.modal-overlay.show-modal {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Inside Card Content Box */
+.modal-card {
+    background-color: #1E293B;
+    border: 1px solid #334155;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 450px;
+    padding: 40px 24px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.show-modal .modal-card {
+    transform: scale(1);
+}
+
+/* Close "X" Button */
+.close-modal-btn {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #94A3B8;
+    font-size: 28px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-modal-btn:hover {
+    color: #F8FAFC;
+}
+
+/* Modal Content Elements */
+.profile-pic {
+    font-size: 48px;
+    background-color: #3B82F6;
+    width: 80px;
+    height: 80px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 16px;
+}
+
+.modal-card h2 {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.modal-card p {
+    color: #94A3B8;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+}
+
+.download-resume-btn {
+    display: inline-block;
+    background-color: #3B82F6;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.download-resume-btn:hover {
+    background-color: #2563EB;
+}
+
+/* Styling for the close button inside the contact box */
+.close-contact-btn {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #94A3B8;
+    font-size: 28px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-contact-btn:hover {
+    color: #F8FAFC;
+}
+
+/* Container for text list details */
+.contact-details {
+    background-color: #0F172A; /* Dark inside container background */
+    border-radius: 8px;
+    padding: 20px;
+    text-align: left;
+    margin-top: 16px;
+}
+
+.contact-item {
+    font-size: 15px;
+    color: #F8FAFC;
+    padding: 12px 0;
+    border-bottom: 1px solid #334155;
+}
+
+.contact-item:last-child {
+    border-bottom: none; /* Removes line from the last item */
+}
