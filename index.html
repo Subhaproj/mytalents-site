@@ -49,35 +49,52 @@
             </div>
 
             <!-- Card 2: Coded Software (Now with an Interactive Slam Book Gallery) -->
-            <div class="project-card" data-category="code">
-    
-    <!-- Interactive Carousel Container -->
-    <div class="carousel-container">
-        <!-- Change the src paths to match your exact image names and file extensions (.jpg or .png) -->
-        <div class="carousel-slides">
-            <img src="slambook/1.png" class="slide active" alt="Slam Book Page 1">
-            <img src="slambook/2.png" class="slide" alt="Slam Book Page 2">
-            <img src="slambook/3.png" class="slide" alt="Slam Book Page 3">
-            <img src="slambook/4.png" class="slide" alt="Slam Book Page 4">
-            <img src="slambook/5.png" class="slide" alt="Slam Book Page 5">
-            <img src="slambook/6.png" class="slide" alt="Slam Book Page 6">
-            <img src="slambook/7.png" class="slide" alt="Slam Book Page 7">
-            <img src="slambook/8.png" class="slide" alt="Slam Book Page 8">
-            <img src="slambook/9.png" class="slide" alt="Slam Book Page 9">
-            <img src="slambook/10.png" class="slide" alt="Slam Book Page 10">
-            
-        </div>
+            <!-- Card 2: Coded Software Card (Now opens a popup modal when clicked) -->
+<div class="project-card" data-category="code" id="openSlamBook">
+    <div class="card-image code-bg">
+        <!-- This acts as your static cover photo on the homepage -->
+        <img src="slambook/1.png" class="card-cover-img" alt="Slam Book Project Cover">
+        <span class="preview-tag">Click to View Gallery</span>
         
-        <!-- Navigation Arrows -->
-        <button class="carousel-btn prev-btn">&#10094;</button>
-        <button class="carousel-btn next-btn">&#10095;</button>
     </div>
-
     <div class="card-content">
         <h3>Slam Book Java Application</h3>
         <p class="tagline">Desktop App Built with Java</p>
     </div>
 </div>
+
+<!-- Hidden Full-Screen Popup Modal Layer for Slam Book Slideshow -->
+<div id="slamBookModal" class="modal-overlay">
+    <div class="modal-card slider-card">
+        <button class="close-slider-btn">&times;</button>
+        
+        <div class="popup-slider-container">
+            <!-- Full-screen slide layout images -->
+            <div class="popup-slides">
+                <img src="slambook/1.png" class="pop-slide active" alt="Page 1">
+                <img src="slambook/2.png" class="pop-slide" alt="Page 2">
+                <img src="slambook/3.png" class="pop-slide" alt="Page 3">
+                <img src="slambook/4.png" class="pop-slide" alt="Page 4">
+                <img src="slambook/5.png" class="pop-slide" alt="Page 5">
+                <img src="slambook/6.png" class="pop-slide" alt="Page 6">
+                <img src="slambook/7.png" class="pop-slide" alt="Page 7">
+                <img src="slambook/8.png" class="pop-slide" alt="Page 8">
+                <img src="slambook/9.png" class="pop-slide" alt="Page 9">
+                <img src="slambook/10.png" class="pop-slide" alt="Page 10">
+            </div>
+            
+            <!-- Navigation Interaction Arrows inside the popup -->
+            <button class="popup-arrow prev-arrow">&#10094;</button>
+            <button class="popup-arrow next-arrow">&#10095;</button>
+        </div>
+
+        <div class="popup-caption">
+            <h3>Slam Book Application Interface</h3>
+            <p>Click the arrows to step through the system panels.</p>
+        </div>
+    </div>
+</div>
+
 
 
             <!-- NEW Card 3: Traditional Art Card (Visible on Homepage) -->
@@ -204,33 +221,50 @@
                 modalOverlay.classList.remove('show-modal');
             }
         });
+                // Popup Modal Toggle Logic
+        const openCard = document.getElementById('openSlamBook');
+        const sliderModal = document.getElementById('slamBookModal');
+        const closeSliderBtn = document.querySelector('.close-slider-btn');
 
-                // Slam Book Interactive Gallery Logic
-        const slides = document.querySelectorAll('.slide');
-        const nextBtn = document.querySelector('.next-btn');
-        const prevBtn = document.querySelector('.prev-btn');
-        let currentSlideIndex = 0;
+        // Open layout popup on card click
+        openCard.addEventListener('click', () => {
+            sliderModal.classList.add('show-modal');
+        });
 
-        function showSlide(index) {
-            // Remove active class from current image
-            slides[currentSlideIndex].classList.remove('active');
-            
-            // Calculate next/prev index safely within 0 to 9 loop limits
-            currentSlideIndex = (index + slides.length) % slides.length;
-            
-            // Add active class to new image
-            slides[currentSlideIndex].classList.add('active');
+        // Dismiss controls
+        closeSliderBtn.addEventListener('click', () => {
+            sliderModal.classList.remove('show-modal');
+        });
+
+        sliderModal.addEventListener('click', (e) => {
+            if (e.target === sliderModal) {
+                sliderModal.classList.remove('show-modal');
+            }
+        });
+
+        // Inside-Popup Image Slide Navigation Logic
+        const popSlides = document.querySelectorAll('.pop-slide');
+        const nextArrow = document.querySelector('.next-arrow');
+        const prevArrow = document.querySelector('.prev-arrow');
+        let activeSlideNum = 0;
+
+        function renderPopSlide(targetIndex) {
+            popSlides[activeSlideNum].classList.remove('active');
+            activeSlideNum = (targetIndex + popSlides.length) % popSlides.length;
+            popSlides[activeSlideNum].classList.add('active');
         }
 
-        nextBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Stops the card click event from firing
-            showSlide(currentSlideIndex + 1);
+        nextArrow.addEventListener('click', (e) => {
+            e.stopPropagation();
+            renderPopSlide(activeSlideNum + 1);
         });
 
-        prevBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Stops the card click event from firing
-            showSlide(currentSlideIndex - 1);
+        prevArrow.addEventListener('click', (e) => {
+            e.stopPropagation();
+            renderPopSlide(activeSlideNum - 1);
         });
+
+ 
 
 
     </script>

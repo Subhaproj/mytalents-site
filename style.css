@@ -347,56 +347,138 @@ body {
     border-bottom: none; /* Removes line from the last item */
 }
 
-/* Carousel Container Constraints */
-.carousel-container {
-    position: relative;
-    height: 260px; /* Matches your other project card heights */
-    background-color: #0F172A;
-    overflow: hidden;
+/* ==========================================================================
+   SLAM BOOK POPUP SLIDER STYLES
+   ========================================================================== */
+
+/* Custom formatting sizing specifically for your application slider box */
+.slider-card {
+    max-width: 700px; /* Expands to show widescreen layout app views clearly */
+    padding: 24px;
 }
 
-/* Image Stack Logic */
-.carousel-slides {
+.popup-slider-container {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Tall viewport area for detailed image review */
+    background-color: #0b0f19;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.popup-slides {
     width: 100%;
     height: 100%;
     position: relative;
 }
 
-.carousel-slides .slide {
+.pop-slide {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures your sketches/screenshots fit nicely */
+    object-fit: contain; /* Prevents text or shapes on your screens from stretching */
+    background-color: #0b0f19;
     opacity: 0;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
 }
 
-/* Shows only the currently selected active image */
-.carousel-slides .slide.active {
+.pop-slide.active {
     opacity: 1;
 }
 
-/* Left & Right Interactive Clicking Buttons */
-.carousel-btn {
+/* Close Control styling */
+.close-slider-btn {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #94A3B8;
+    font-size: 32px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.close-slider-btn:hover { 
+    color: #F8FAFC; 
+}
+
+/* Interactive Nav Arrows centering overlay */
+.popup-arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(15, 23, 42, 0.6);
+    background-color: rgba(15, 23, 42, 0.7);
     color: #F8FAFC;
     border: none;
-    font-size: 18px;
-    padding: 12px 8px;
+    font-size: 24px;
+    padding: 16px 12px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 6px;
     transition: background-color 0.2s;
-    z-index: 10;
+    z-index: 20;
 }
 
-.carousel-btn:hover {
-    background-color: #3B82F6; /* Glows blue on hover */
+.popup-arrow:hover { 
+    background-color: #3B82F6; 
 }
 
-.prev-btn { left: 10px; }
-.next-btn { right: 10px; }
+.prev-arrow { left: 12px; }
+.next-arrow { right: 12px; }
+
+.popup-caption h3 { 
+    font-size: 18px; 
+    margin-bottom: 4px; 
+    color: #F8FAFC; 
+}
+
+.popup-caption p { 
+    color: #94A3B8; 
+    font-size: 14px; 
+}
+
+/* Mobile Adaptations */
+@media (max-width: 768px) {
+    .popup-slider-container { 
+        height: 250px; 
+    }
+}
+
+/* 1. Make the container a relative anchor point for the layers inside */
+.card-image {
+    height: 260px;
+    width: 100%;
+    position: relative; /* Crucial: This anchors absolute items inside it */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 2. Force the cover image to be the base background layer */
+.card-cover-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1; /* Sits at the bottom */
+}
+
+/* 3. Force the pill badge to float perfectly centered on top of the image */
+.preview-tag {
+    position: absolute; /* Lifts it up so it floats */
+    z-index: 2; /* Forces it to sit cleanly on top of the image layer */
+    background-color: rgba(15, 23, 42, 0.85); /* Slightly darker for better text contrast */
+    color: #F8FAFC;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    pointer-events: none; /* Allows clicks to pass right through to the card */
+    white-space: nowrap; /* Stops the text from breaking into two lines */
+}
